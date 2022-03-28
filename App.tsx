@@ -1,11 +1,10 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import styled from 'styled-components/native';
-const View = styled.View``;
+import RootStack from './screens/RootStack';
 const App = () => {
   return (
     <NavigationContainer>
-      <View></View>
+      <RootStack />
     </NavigationContainer>
   );
 };
