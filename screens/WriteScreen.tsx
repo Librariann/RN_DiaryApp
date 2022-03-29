@@ -1,20 +1,19 @@
 import React from 'react';
 import {SafeAreaView} from 'react-native';
+import {observer} from 'mobx-react';
 import styled from 'styled-components/native';
+import WriteHeader from '../components/WriteHeader';
 
 const BlockView = styled.View``;
 const Button = styled.Button`
   display: block;
 `;
-const WriteScreen = () => {
-  const onPress = () => {};
+const WriteScreen = observer(() => {
   return (
     <SafeAreaView>
-      <BlockView>
-        <Button title="뒤로가기.." onPress={onPress} />
-      </BlockView>
+      <WriteHeader />
     </SafeAreaView>
   );
-};
+});
 
 export default WriteScreen;

@@ -2,10 +2,11 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import MainTab from './MainTab';
 import WriteScreen from './WriteScreen';
+import {observer} from 'mobx-react';
 
 const Stack = createNativeStackNavigator();
 
-const RootStack = () => {
+const RootStack = observer(() => {
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -20,6 +21,6 @@ const RootStack = () => {
       />
     </Stack.Navigator>
   );
-};
+});
 
 export default RootStack;

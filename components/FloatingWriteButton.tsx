@@ -4,6 +4,7 @@ import {Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Platform} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {observer} from 'mobx-react';
 
 interface IPlatform {
   platform: string;
@@ -39,7 +40,7 @@ const StyledView = styled.View<IPressed>`
   opacity: ${({pressed}) => (pressed ? 0.6 : 1)};
 `;
 
-const FloatingWriteButton = () => {
+const FloatingWriteButton = observer(() => {
   const navigation = useNavigation();
   const onPress = () => {
     navigation.navigate('Write');
@@ -55,6 +56,6 @@ const FloatingWriteButton = () => {
       </Pressable>
     </ViewWrapper>
   );
-};
+});
 
 export default FloatingWriteButton;

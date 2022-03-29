@@ -1,7 +1,7 @@
-import {name} from './name';
+import {name, testName} from './name';
 
 const rootStore = () => {
-  return {name};
+  return {name, testName};
 };
 
 export default rootStore;

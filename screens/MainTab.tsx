@@ -4,10 +4,11 @@ import FeedsScreen from './FeedsScreens';
 import CalendarScreen from './CalendarScreen';
 import SearchScreen from './SearchScreen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {observer} from 'mobx-react';
 
 const Tab = createBottomTabNavigator();
 
-const MainTab = () => {
+const MainTab = observer(() => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -43,6 +44,6 @@ const MainTab = () => {
       />
     </Tab.Navigator>
   );
-};
+});
 
 export default MainTab;
