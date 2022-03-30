@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled, {css} from 'styled-components/native';
-import {Pressable} from 'react-native';
+import {Animated, Pressable, Platform} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {Platform} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {observer} from 'mobx-react';
 
@@ -40,21 +39,50 @@ const StyledView = styled.View<IPressed>`
   opacity: ${({pressed}) => (pressed ? 0.6 : 1)};
 `;
 
-const FloatingWriteButton = observer(() => {
-  const navigation = useNavigation();
+const FloatingWriteButton = observer(({hidden}: any) => {
+  const navigation: any = useNavigation();
   const onPress = () => {
     navigation.navigate('Write');
   };
+
+  const animation = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.spring(animation, {
+      toValue: hidden ? 1 : 0,
+      useNativeDriver: true,
+      tension: 45,
+      friction: 5,
+    }).start();
+  }, [animation, hidden]);
   return (
-    <ViewWrapper platform={Platform.OS}>
-      <Pressable android_ripple={{color: 'white'}} onPress={onPress}>
-        {({pressed}) => (
-          <StyledView pressed={pressed}>
-            <Icon name="add" size={24} style={{color: 'white'}} />
-          </StyledView>
-        )}
-      </Pressable>
-    </ViewWrapper>
+    <Animated.View
+      style={[
+        {
+          transform: [
+            {
+              translateY: animation.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 88],
+              }),
+            },
+          ],
+          opacity: animation.interpolate({
+            inputRange: [0, 1],
+            outputRange: [1, 0],
+          }),
+        },
+      ]}>
+      <ViewWrapper platform={Platform.OS}>
+        <Pressable android_ripple={{color: 'white'}} onPress={onPress}>
+          {({pressed}) => (
+            <StyledView pressed={pressed}>
+              <Icon name="add" size={24} style={{color: 'white'}} />
+            </StyledView>
+          )}
+        </Pressable>
+      </ViewWrapper>
+    </Animated.View>
   );
 });
 
