@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, {useEffect, useRef} from 'react';
 import styled, {css} from 'styled-components/native';
 import {Animated, Pressable, Platform} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
