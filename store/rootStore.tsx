@@ -1,7 +1,7 @@
-import {name, testName} from './name';
+import {LogContext} from './LogStore';
 
 const rootStore = () => {
-  return {name, testName};
+  return {LogContext};
 };
 
 export default rootStore;

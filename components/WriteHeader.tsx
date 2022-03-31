@@ -2,6 +2,9 @@ import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import styled from 'styled-components/native';
 import TransparentCircleButton from './TransparentCircleButton';
+interface IProps {
+  onSave: () => void;
+}
 
 const ViewBlock = styled.View`
   height: 48px;
@@ -23,8 +26,8 @@ const ViewButtons = styled.View`
   align-items: center;
 `;
 
-const WriteHeader = () => {
-  const navigation = useNavigation();
+const WriteHeader = ({onSave}: IProps) => {
+  const navigation: any = useNavigation();
   const onGoBack = () => {
     navigation.pop();
   };
@@ -41,9 +44,13 @@ const WriteHeader = () => {
         <TransparentCircleButton
           name="delete-forever"
           color="#ef5350"
-          hasMarginRight={true}
+          hasMarginRight
         />
-        <TransparentCircleButton name="check" color="#009688" />
+        <TransparentCircleButton
+          name="check"
+          color="#009688"
+          onPress={onSave}
+        />
       </ViewButtons>
     </ViewBlock>
   );

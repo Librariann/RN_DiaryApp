@@ -16,7 +16,7 @@ interface IButtonStyle {
   name: string;
   color: string;
   hasMarginRight?: boolean | null | undefined;
-  onPress?: Function;
+  onPress?: () => void;
 }
 
 const ViewBtnWrapper = styled.View<IMargin>`
@@ -24,7 +24,7 @@ const ViewBtnWrapper = styled.View<IMargin>`
   height: 32px;
   border-radius: 16px;
   overflow: hidden;
-  margin-right: ${props => (props.hasMarginRight ? 8 : 0)};
+  margin-right: ${props => (props.hasMarginRight ? 8 : 0)}px;
 `;
 const PressableBtn = styled.Pressable`
   align-items: center;

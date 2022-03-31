@@ -1,33 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import FloatingWriteButton from '../components/FloatingWriteButton';
 import rootStore from '../store/rootStore';
-import {action} from 'mobx';
 import {observer} from 'mobx-react';
+import FeedList from '../components/FeedList';
 
 const BlockView = styled.View`
   flex: 1;
 `;
 
-const Text = styled.Text`
-  font-size: 40px;
-`;
-
-const Button = styled.Button``;
 const FeedsScreen = observer(() => {
-  const {name, testName} = rootStore();
-  const update = action(() => {
-    name.nameStore = '바뀐다!';
-    name.number += 1;
-    testName.test += 1;
-  });
+  const [hidden, setHidden] = useState(false);
+  const onScrolledToBottom = (isBottom: any) => {
+    if (hidden !== isBottom) {
+      setHidden(isBottom);
+    }
+  };
+  const {LogContext} = rootStore();
+  console.log(LogContext);
   return (
     <BlockView>
-      <FloatingWriteButton />
-      <Text>
-        {name.nameStore} {name.number} {testName.test}
-      </Text>
-      <Button title="변경버튼" onPress={update} />
+      <FeedList logs={LogContext} onScrolledToBottom={onScrolledToBottom} />
+      <FloatingWriteButton hidden={hidden} />
     </BlockView>
   );
 });
