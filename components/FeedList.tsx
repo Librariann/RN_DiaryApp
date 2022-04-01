@@ -21,7 +21,10 @@ const FeedList = ({logs, onScrolledToBottom}: any) => {
     const distanceFromBottom =
       contentSize.height - layoutMeasurement.height - contentOffset.y;
 
-    if (distanceFromBottom < 72) {
+    if (
+      contentSize.height > layoutMeasurement.height &&
+      distanceFromBottom < 72
+    ) {
       onScrolledToBottom(true);
     } else {
       onScrolledToBottom(false);
@@ -30,7 +33,7 @@ const FeedList = ({logs, onScrolledToBottom}: any) => {
   return (
     <FlatList
       data={logs.dataArray}
-      renderItem={({item}) => <FeedListItem log={item} />}
+      renderItem={({item}: any) => <FeedListItem log={item} />}
       keyExtractor={(item: any) => item.id}
       ItemSeparatorComponent={() => <SeparatorView />}
       onScroll={onScroll}

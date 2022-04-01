@@ -4,6 +4,8 @@ import styled from 'styled-components/native';
 import TransparentCircleButton from './TransparentCircleButton';
 interface IProps {
   onSave: () => void;
+  onAskRemove: () => void;
+  isEditing: boolean;
 }
 
 const ViewBlock = styled.View`
@@ -26,7 +28,7 @@ const ViewButtons = styled.View`
   align-items: center;
 `;
 
-const WriteHeader = ({onSave}: IProps) => {
+const WriteHeader = ({onSave, onAskRemove, isEditing}: IProps) => {
   const navigation: any = useNavigation();
   const onGoBack = () => {
     navigation.pop();
@@ -41,11 +43,14 @@ const WriteHeader = ({onSave}: IProps) => {
         />
       </ViewBtnWrapper>
       <ViewButtons>
-        <TransparentCircleButton
-          name="delete-forever"
-          color="#ef5350"
-          hasMarginRight
-        />
+        {isEditing && (
+          <TransparentCircleButton
+            name="delete-forever"
+            color="#ef5350"
+            hasMarginRight
+            onPress={onAskRemove}
+          />
+        )}
         <TransparentCircleButton
           name="check"
           color="#009688"

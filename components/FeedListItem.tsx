@@ -3,10 +3,19 @@ import {Platform} from 'react-native';
 import styled from 'styled-components/native';
 import {format, formatDistanceToNow} from 'date-fns';
 import {ko} from 'date-fns/locale';
+import {useNavigation} from '@react-navigation/native';
 
 interface IPressed {
   platform: string;
   pressed: boolean;
+}
+
+interface ILogged {
+  log: {
+    title: string;
+    body: string;
+    date: string;
+  };
 }
 
 const Pressable = styled.Pressable`
@@ -60,10 +69,15 @@ const formatDate = (date: string) => {
   return format(d, 'PPP EEE p', {locale: ko});
 };
 
-const FeedListItem = ({log}: any) => {
+const FeedListItem = ({log}: ILogged) => {
   const {title, body, date} = log;
+  const navigation: any = useNavigation();
+  const onPress = () => {
+    navigation.navigate('Write', {log});
+  };
+
   return (
-    <Pressable android_ripple={{color: '#ededed'}}>
+    <Pressable android_ripple={{color: '#ededed'}} onPress={onPress}>
       {({pressed}) => (
         <StyledView platform={Platform.OS} pressed={pressed}>
           <DateText>{formatDate(date)}</DateText>
